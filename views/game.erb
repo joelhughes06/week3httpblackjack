@@ -1,0 +1,53 @@
+<head>
+	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+    <script src="js/bootstrap.min.js"></script>
+<h1>Blackjack yo!</h1>
+
+Welcome <%= session[:player_name] %>.
+</br>
+</br>
+
+<div class="well">
+<h4>Dealer's cards:</h4>
+
+
+	<% session[:dealer_cards].each do |card| %>
+		<%= card_image(card) %>
+
+		<% end %>
+
+</div>
+
+<div class="well">
+<h4>Player's Cards:</h4>
+
+
+	<% session[:player_cards].each do |card| %>
+		<%= card_image(card) %>
+
+		<% end %>
+
+</div>
+
+<h3>What would you like to do?</h3>
+
+<p>
+	<%= session[:player_name] %> has <%= calculate_total(session[:player_cards]) %>
+
+<% if @show_hit_or_stay_buttons %>
+
+</br>
+</br>
+<form action="/game/player/hit" method="post">
+
+<input type="Submit" class="btn btn-success" value="Hit" />
+
+</form>
+<form action="/game/player/stay" method="post">
+
+<input type="Submit" class="btn btn-warning" value="Stay" />
+
+</form>
+<% end %>
+</p>
